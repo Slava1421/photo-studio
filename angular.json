@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1, 
+  "version": 1,
   "newProjectRoot": "projects",
   "projects": {
     "photo-studio": {
@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "photo-studio"
+    }
+  },
+  "defaultProject": "photo-studio",
+  "cli": {
+    "analytics": "4992cd79-9a32-4ebc-a4b7-64fdc23062ef"
+  }
 }
