@@ -64,7 +64,7 @@ export class HomePageComponent implements AfterViewInit {
   }
 
   scrollToSection(indexSection: number): void {
-    if (this.activateAnimation) { return; }
+    if (this.activateAnimation || this.indexSection === indexSection) { return; }
 
     this.activateAnimation = true;
     this.indexSection = indexSection;
