@@ -6,6 +6,7 @@ import { CyclicSliderComponent } from './components/cyclic-slider/cyclic-slider.
 
 @NgModule({
   declarations: [CyclicSliderComponent],
+  exports: [CyclicSliderComponent],
   imports: [
     CommonModule
   ]

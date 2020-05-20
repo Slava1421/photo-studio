@@ -1,1 +1,11 @@
-<p>phc-cyclic-slider works!</p>
+<div class="slider" [style.height]="height + 'px' || '100%'">
+  <div class="slider__slide" #slider [class.slide-animation]="activateAnimation"
+    *ngFor="let section of sections; let i = index" [style.height]="height + 'px' || '100%'"
+    [style.transform]="'translateY(' + startSlidePosTransformVH + 'px)'">
+    <div [style.background]="section.background"> {{section.title}}</div>
+    <ng-content></ng-content>
+  </div>
+</div>
+<button (click)="scrollToSection(2)" style="position: absolute; top: 60px; right: 0;">scroll</button>
+<button (click)="next()" style="position: absolute; top: 0; right: 0;">next</button>
+  <button (click)="prew()" style="position: absolute; top: 30px; right: 0;">del</button>

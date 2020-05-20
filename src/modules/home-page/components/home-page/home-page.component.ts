@@ -7,8 +7,8 @@ import { ISection } from '../../models/section';
   styleUrls: ['./home-page.component.scss'],
 
 })
-export class HomePageComponent implements AfterViewInit {
-
+export class HomePageComponent {
+/*
   @ViewChild('sliders') sliders: ElementRef;
 
   sections: Array<ISection> = [
@@ -92,5 +92,5 @@ export class HomePageComponent implements AfterViewInit {
       this.startSlidePosTransformVH = this.startSlidePosTransformVH + (50);
     }
 
-  }
+  }*/
 }
