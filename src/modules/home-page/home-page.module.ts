@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { SectionComponent } from './components/section/section.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
 @NgModule({
-  declarations: [HomePageComponent],
+  declarations: [HomePageComponent, SectionComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    BrowserAnimationsModule
   ],
   exports: [HomePageComponent]
 })
