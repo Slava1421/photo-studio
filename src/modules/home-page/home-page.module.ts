@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomePageComponent } from './components/home-page/home-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CyclicSliderModule } from '../cyclic-slider/cyclic-slider.module';
-
+import { QRCodeModule } from 'angularx-qrcode';
 
 
 @NgModule({
@@ -11,7 +11,8 @@ import { CyclicSliderModule } from '../cyclic-slider/cyclic-slider.module';
   imports: [
     CommonModule,
     BrowserAnimationsModule,
-    CyclicSliderModule
+    CyclicSliderModule,
+    QRCodeModule
   ],
   exports: [HomePageComponent]
 })

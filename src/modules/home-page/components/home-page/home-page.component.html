@@ -1,11 +1,17 @@
-<div class="sections">
+<div class="home-page">
   <app-cyclic-slider>
-    <div *appSlideItem [style.background]="'red'">1</div>
+    <div class="home-page__slide" *appSlideItem>
+      <div class="home-page__photo">
+        <qrcode *ngIf="false" [qrdata]="'Your data string'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+        <img [src]="imgBase64">
+        
+      </div>
+    </div>
     <div *appSlideItem [style.background]="'green'">2</div>
     <div *appSlideItem [style.background]="'blue'">3</div>
     <div *appSlideItem [style.background]="'yellow'">4</div>
     <div *appSlideItem [style.background]="'grey'">5</div>
     <div *appSlideItem [style.background]="'brown'">6</div>
   </app-cyclic-slider>
-  
+
 </div>
