@@ -4,6 +4,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CyclicSliderModule } from '../cyclic-slider/cyclic-slider.module';
 import { QRCodeModule } from 'angularx-qrcode';
+import { WebSocketPhotoService } from './services/web-socket-photo.service';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     CyclicSliderModule,
     QRCodeModule
   ],
-  exports: [HomePageComponent]
+  exports: [HomePageComponent],
+  providers: [WebSocketPhotoService]
 })
 export class HomePageModule { }

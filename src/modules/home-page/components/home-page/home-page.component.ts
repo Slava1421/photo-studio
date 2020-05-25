@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
-import { ISection } from '../../models/section';
+import { Component, OnInit } from '@angular/core';
+import { WebSocketPhotoService } from '../../services/web-socket-photo.service';
 
 @Component({
   selector: 'app-home-page',
@@ -10,6 +10,10 @@ import { ISection } from '../../models/section';
 export class HomePageComponent implements OnInit {
 
   imgBase64: string;
+
+  constructor(private socket: WebSocketPhotoService) {
+
+  }
 
   ngOnInit(): void {
     this.convertImgToBase64('https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0', (dataUrl) => {
@@ -32,4 +36,7 @@ export class HomePageComponent implements OnInit {
     xhr.send();
   }
 
+  click() {
+    this.socket.closeConnect();
+  }
 }
