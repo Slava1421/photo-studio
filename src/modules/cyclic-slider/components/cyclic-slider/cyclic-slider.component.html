@@ -1,8 +1,8 @@
-<div class="slider" [style.height]="height + 'px' || '100%'">
+<div class="slider" [style.height]="height > 100 ? height + 'px' : '100%'">
 
   <div class="slider__slide" #slider [class.slide-animation]="activateAnimation"
-    [style.transform]="'translateY(' + startSlidePosTransformVH + 'px)'">
-    <div *ngFor="let item of sections;" [style.height]="height + 'px' || '100%'">
+    [style.transform]="'translateY(' + startSlidePosTransform + 'px)'">
+    <div class="slider__slide-section" *ngFor="let item of sections;" [style.height]="height > 100 ? height + 'px' : '100%'">
       <ng-container [ngTemplateOutlet]="item.tpl">
       </ng-container>
     </div>

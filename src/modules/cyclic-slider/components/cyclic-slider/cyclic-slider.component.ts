@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, ElementRef, Input, QueryList, ContentChildren, forwardRef, AfterContentInit } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef, Input, QueryList, ContentChildren, forwardRef, AfterContentInit, OnInit } from '@angular/core';
 import { ISection } from 'src/modules/home-page/models/section';
 import { SlideItemDirective } from '../../directives/slide-item.directive';
 
@@ -10,19 +10,25 @@ import { SlideItemDirective } from '../../directives/slide-item.directive';
     class: 'slider'
   }
 })
-export class CyclicSliderComponent implements AfterViewInit, AfterContentInit {
+export class CyclicSliderComponent implements AfterViewInit, AfterContentInit, OnInit {
 
   @ViewChild('slider') sliders: ElementRef;
-  @Input() height: number = 250;
+  @Input() height: number = 0;
 
   @ContentChildren(SlideItemDirective) slideInputs: QueryList<SlideItemDirective>;
 
   sections: SlideItemDirective[];
 
-  startSlidePosTransformVH = 0;
+  startSlidePosTransform = 0;
   activateAnimation = false;
 
   indexSection: number = 0;
+
+  constructor(private elRef: ElementRef) {}
+
+  ngOnInit(): void {
+    this.height = this.height === 0 ? this.elRef.nativeElement.offsetParent.clientHeight : this.height;
+  }
 
   ngAfterContentInit(): void {
     this.sections = this.slideInputs.toArray();
@@ -35,12 +41,12 @@ export class CyclicSliderComponent implements AfterViewInit, AfterContentInit {
       if (this.indexSection === this.sections.length) {
         const lastSection = this.sections.pop();
         this.sections.unshift(lastSection);
-        this.startSlidePosTransformVH = 0;
+        this.startSlidePosTransform = 0;
         this.indexSection = 0;
       } else if (this.indexSection < 0) {
         const firstSection = this.sections.shift();
         this.sections.push(firstSection);
-        this.startSlidePosTransformVH = (this.sections.length - 1) * (-this.height);
+        this.startSlidePosTransform = (this.sections.length - 1) * (-this.height);
         this.indexSection = this.sections.length - 1;
       }
     });
@@ -56,16 +62,16 @@ export class CyclicSliderComponent implements AfterViewInit, AfterContentInit {
       const firstSection = this.sections.shift();
       this.sections.push(firstSection);
       
-      this.startSlidePosTransformVH = this.startSlidePosTransformVH + (this.height);
+      this.startSlidePosTransform = this.startSlidePosTransform + (this.height);
 
       setTimeout(() => {
         this.activateAnimation = true;
-        this.startSlidePosTransformVH = this.startSlidePosTransformVH + (-this.height);
+        this.startSlidePosTransform = this.startSlidePosTransform + (-this.height);
       });
       
 
     } else {
-      this.startSlidePosTransformVH = this.startSlidePosTransformVH + (-this.height);
+      this.startSlidePosTransform = this.startSlidePosTransform + (-this.height);
     }
   }
 
@@ -74,7 +80,7 @@ export class CyclicSliderComponent implements AfterViewInit, AfterContentInit {
 
     this.activateAnimation = true;
     this.indexSection = indexSection;
-    this.startSlidePosTransformVH = (-this.height * indexSection);
+    this.startSlidePosTransform = (-this.height * indexSection);
   }
 
   prew(): void {
@@ -86,16 +92,16 @@ export class CyclicSliderComponent implements AfterViewInit, AfterContentInit {
       this.activateAnimation = false;
       const lastSection = this.sections.pop();
       this.sections.unshift(lastSection);
-      this.startSlidePosTransformVH = this.startSlidePosTransformVH + (-this.height);
+      this.startSlidePosTransform = this.startSlidePosTransform + (-this.height);
 
       setTimeout(() => {
         this.activateAnimation = true;
-        this.startSlidePosTransformVH = this.startSlidePosTransformVH + (this.height);
+        this.startSlidePosTransform = this.startSlidePosTransform + (this.height);
       });
 
     } else {
 
-      this.startSlidePosTransformVH = this.startSlidePosTransformVH + (this.height);
+      this.startSlidePosTransform = this.startSlidePosTransform + (this.height);
     }
 
   }
