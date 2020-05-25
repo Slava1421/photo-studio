@@ -1,5 +1,12 @@
 <div class="sections">
-  <app-cyclic-slider></app-cyclic-slider>
+  <app-cyclic-slider>
+    <div *appSlideItem [style.background]="'red'">1</div>
+    <div *appSlideItem [style.background]="'green'">2</div>
+    <div *appSlideItem [style.background]="'blue'">3</div>
+    <div *appSlideItem [style.background]="'yellow'">4</div>
+    <div *appSlideItem [style.background]="'grey'">5</div>
+    <div *appSlideItem [style.background]="'brown'">6</div>
+  </app-cyclic-slider>
   <!-- <div #sliders [class.slide-animation]="activateAnimation" [style.transform]="'translateY(' + startSlidePosTransformVH + 'vh)'">
     <app-section *ngFor="let section of sections; let i = index" [title]="section.title"
       [background]="section.background">

@@ -1,5 +1,6 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef, Input, QueryList, ContentChildren, forwardRef, AfterContentInit } from '@angular/core';
 import { ISection } from 'src/modules/home-page/models/section';
+import { SlideItemDirective } from '../../directives/slide-item.directive';
 
 @Component({
   selector: 'app-cyclic-slider',
@@ -9,23 +10,23 @@ import { ISection } from 'src/modules/home-page/models/section';
     class: 'slider'
   }
 })
-export class CyclicSliderComponent implements AfterViewInit {
+export class CyclicSliderComponent implements AfterViewInit, AfterContentInit {
 
   @ViewChild('slider') sliders: ElementRef;
-  @Input() height: number = 50;
+  @Input() height: number = 250;
 
-  sections: Array<ISection> = [
-    { background: 'green', title: 'test1' },
-    { background: 'red', title: 'test2' },
-    { background: 'blue', title: 'test4' },
-    { background: 'yellow', title: 'test5' },
-    { background: 'brown', title: 'test6' }
-  ];
+  @ContentChildren(SlideItemDirective) slideInputs: QueryList<SlideItemDirective>;
+
+  sections: SlideItemDirective[];
 
   startSlidePosTransformVH = 0;
   activateAnimation = false;
 
   indexSection: number = 0;
+
+  ngAfterContentInit(): void {
+    this.sections = this.slideInputs.toArray();
+  }
 
   ngAfterViewInit(): void {
     this.sliders.nativeElement.addEventListener('transitionend', () => {
@@ -54,12 +55,14 @@ export class CyclicSliderComponent implements AfterViewInit {
       this.activateAnimation = false;
       const firstSection = this.sections.shift();
       this.sections.push(firstSection);
+      
       this.startSlidePosTransformVH = this.startSlidePosTransformVH + (this.height);
 
       setTimeout(() => {
         this.activateAnimation = true;
         this.startSlidePosTransformVH = this.startSlidePosTransformVH + (-this.height);
       });
+      
 
     } else {
       this.startSlidePosTransformVH = this.startSlidePosTransformVH + (-this.height);

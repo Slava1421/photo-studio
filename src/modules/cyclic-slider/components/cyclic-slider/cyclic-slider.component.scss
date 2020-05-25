@@ -8,8 +8,8 @@
 }
 
 .slider__slide {
-  background: red;
-  overflow: auto;
+  border: solid 2px;
+  box-sizing: border-box;
 }
 
 .slide-animation {
