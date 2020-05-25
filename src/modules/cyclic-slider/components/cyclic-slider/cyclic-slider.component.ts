@@ -1,28 +1,32 @@
-import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
-import { ISection } from '../../models/section';
+import { Component, AfterViewInit, ViewChild, ElementRef, Input, QueryList, ContentChildren, forwardRef, AfterContentInit } from '@angular/core';
+import { ISection } from 'src/modules/home-page/models/section';
+import { SlideItemDirective } from '../../directives/slide-item.directive';
 
 @Component({
-  selector: 'app-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss'],
-
+  selector: 'app-cyclic-slider',
+  templateUrl: './cyclic-slider.component.html',
+  styleUrls: ['./cyclic-slider.component.scss'],
+  host: {
+    class: 'slider'
+  }
 })
-export class HomePageComponent {
-/*
-  @ViewChild('sliders') sliders: ElementRef;
+export class CyclicSliderComponent implements AfterViewInit, AfterContentInit {
 
-  sections: Array<ISection> = [
-    { background: 'green', title: 'test1' },
-    { background: 'red', title: 'test2' },
-    { background: 'blue', title: 'test3' },
-    { background: 'yellow', title: 'test3' },
-    { background: 'brown', title: 'test3' }
-  ];
+  @ViewChild('slider') sliders: ElementRef;
+  @Input() height: number = 250;
+
+  @ContentChildren(SlideItemDirective) slideInputs: QueryList<SlideItemDirective>;
+
+  sections: SlideItemDirective[];
 
   startSlidePosTransformVH = 0;
   activateAnimation = false;
 
   indexSection: number = 0;
+
+  ngAfterContentInit(): void {
+    this.sections = this.slideInputs.toArray();
+  }
 
   ngAfterViewInit(): void {
     this.sliders.nativeElement.addEventListener('transitionend', () => {
@@ -36,7 +40,7 @@ export class HomePageComponent {
       } else if (this.indexSection < 0) {
         const firstSection = this.sections.shift();
         this.sections.push(firstSection);
-        this.startSlidePosTransformVH = (this.sections.length - 1) * (-50);
+        this.startSlidePosTransformVH = (this.sections.length - 1) * (-this.height);
         this.indexSection = this.sections.length - 1;
       }
     });
@@ -51,15 +55,17 @@ export class HomePageComponent {
       this.activateAnimation = false;
       const firstSection = this.sections.shift();
       this.sections.push(firstSection);
-      this.startSlidePosTransformVH = this.startSlidePosTransformVH + (50);
+      
+      this.startSlidePosTransformVH = this.startSlidePosTransformVH + (this.height);
 
       setTimeout(() => {
         this.activateAnimation = true;
-        this.startSlidePosTransformVH = this.startSlidePosTransformVH + (-50);
+        this.startSlidePosTransformVH = this.startSlidePosTransformVH + (-this.height);
       });
+      
 
     } else {
-      this.startSlidePosTransformVH = this.startSlidePosTransformVH + (-50);
+      this.startSlidePosTransformVH = this.startSlidePosTransformVH + (-this.height);
     }
   }
 
@@ -68,7 +74,7 @@ export class HomePageComponent {
 
     this.activateAnimation = true;
     this.indexSection = indexSection;
-    this.startSlidePosTransformVH = (-50 * indexSection);
+    this.startSlidePosTransformVH = (-this.height * indexSection);
   }
 
   prew(): void {
@@ -80,17 +86,18 @@ export class HomePageComponent {
       this.activateAnimation = false;
       const lastSection = this.sections.pop();
       this.sections.unshift(lastSection);
-      this.startSlidePosTransformVH = this.startSlidePosTransformVH + (-50);
+      this.startSlidePosTransformVH = this.startSlidePosTransformVH + (-this.height);
 
       setTimeout(() => {
         this.activateAnimation = true;
-        this.startSlidePosTransformVH = this.startSlidePosTransformVH + (50);
+        this.startSlidePosTransformVH = this.startSlidePosTransformVH + (this.height);
       });
 
     } else {
 
-      this.startSlidePosTransformVH = this.startSlidePosTransformVH + (50);
+      this.startSlidePosTransformVH = this.startSlidePosTransformVH + (this.height);
     }
 
-  }*/
+  }
+
 }
