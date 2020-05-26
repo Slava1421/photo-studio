@@ -1,17 +1,68 @@
 <div class="home-page">
-  <app-cyclic-slider>
-    <div class="home-page__slide" *appSlideItem>
-      <div class="home-page__photo">
-        <qrcode *ngIf="false" [qrdata]="'Your data string'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
-        <img [src]="imgBase64">
-        <button (click)="click()"> Закрыть сокет</button>
+  <div class="sidebar">
+    <div class="logo">
+      <img src="../../../../assets/icons/burger.png">
+      <span class="logo__text">cid</span>
+    </div>
+    <div class="message-panel">
+      <div class="message-panel__body">
+        <span class="message-panel__head-text">
+          Микита Кабінович
+        </span>
+        <span class="message-panel__body-text">
+          00001, E-0001 CR Степана Бандери 23-В
+        </span>
+      </div>
+      <div class="message-panel__footer">
+        <img src="../../../../assets/icons/settings.png">
+        <img src="../../../../assets/icons/message.png">
+        <img src="../../../../assets/icons/exit.png">
       </div>
     </div>
-    <div *appSlideItem [style.background]="'green'">2</div>
-    <div *appSlideItem [style.background]="'blue'">3</div>
-    <div *appSlideItem [style.background]="'yellow'">4</div>
-    <div *appSlideItem [style.background]="'grey'">5</div>
-    <div *appSlideItem [style.background]="'brown'">6</div>
-  </app-cyclic-slider>
+    <div class="menu-items">
+      <div class="item">
+        <img src="../../../../assets/icons/proccess.png">
+        <span>Активні процеси</span>
+      </div>
+      <div class="item">
+        <img src="../../../../assets/icons/calculator.png">
+        <span>Калькулятор</span>
+      </div>
+      <div class="item">
+        <img src="../../../../assets/icons/testing.png">
+        <span>Тестування системи</span>
+      </div>
+      <div class="item">
+        <img src="../../../../assets/icons/archive.png">
+        <span>Робота з архівом</span>
+      </div>
+      <div class="item">
+        <img src="../../../../assets/icons/cancel.png">
+        <span>Відмова від товару</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="content__head">
+      <span>Фотографування документів</span>
+    </div>
+    <div class="content__body">
+      <app-cyclic-slider>
+        <div class="home-page__slide" *appSlideItem>
+          <div class="home-page__photo">
+            <qrcode *ngIf="false" [qrdata]="'Your data string'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+            <img [src]="imgBase64">
+            <button (click)="click()"> Закрыть сокет</button>
+          </div>
+        </div>
+        <div *appSlideItem [style.background]="'green'">2</div>
+        <div *appSlideItem [style.background]="'blue'">3</div>
+        <div *appSlideItem [style.background]="'yellow'">4</div>
+        <div *appSlideItem [style.background]="'grey'">5</div>
+        <div *appSlideItem [style.background]="'brown'">6</div>
+      </app-cyclic-slider>
+    </div>
+  </div>
 
 </div>

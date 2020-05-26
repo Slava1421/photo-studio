@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WebSocketPhotoService } from '../../services/web-socket-photo.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home-page',
@@ -12,12 +13,13 @@ export class HomePageComponent implements OnInit {
   imgBase64: string;
 
   constructor(private socket: WebSocketPhotoService) {
-
+    socket.getDataSocket().subscribe((data: string) => {
+      this.imgBase64 = data;
+    });
   }
 
   ngOnInit(): void {
     this.convertImgToBase64('https://www.gravatar.com/avatar/d50c83cc0c6523b4d3f6085295c953e0', (dataUrl) => {
-      console.log('RESULT:', dataUrl);
       this.imgBase64 = dataUrl;
     });
   }

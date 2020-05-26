@@ -1,8 +1,11 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class WebSocketPhotoService {
-
+ 
+  socetResponse$ = new Subject<string>();
+  
   ws = new WebSocket('ws://localhost:4000');
 
   constructor() {
@@ -16,12 +19,16 @@ export class WebSocketPhotoService {
       console.log('Отключение от сокета');
     }
 
-    this.ws.onmessage = (event) => {
-      console.log('Сообщение от серва: ', event);
+    this.ws.onmessage = (event) => { 
+      this.socetResponse$.next(event.data);
     };
   }
 
   closeConnect() {
     this.ws.close();
+  }
+
+  getDataSocket(): Subject<string> {
+    return this.socetResponse$;
   }
 }

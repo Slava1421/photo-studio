@@ -2,13 +2,115 @@
   overflow: hidden;
   position: relative;
   height: 100vh;
+  display: flex;
+  justify-content: stretch;
+  background: linear-gradient(106.15deg, #242428 0%, #00000d 100%);
+  & .sidebar {
+    min-width: 209px;
+    height: 100%;
+    padding: 4px 24px;
+    & .logo {
+      width: 100%;
+      display: flex;
+      align-items: baseline;
+      padding: 4px 0px;
+      margin-bottom: 24px;
+      & img {
+        height: 24px;
+        width: 24px;
+        margin-right: 18px;
+      }
+
+      & .logo__text {
+        font-family: cursive;
+        font-size: 41px;
+        color: #9c37ad;
+      }
+    }
+
+    & .message-panel {
+      border: 1px solid #6d6d7a;
+      border-radius: 24px;
+
+      & .message-panel__body {
+        padding: 16px;
+        border-bottom: 1px solid #6d6d7a;
+        display: flex;
+        flex-direction: column;
+
+        & .message-panel__head-text {
+          font-size: 15px;
+          font-family: monospace;
+          color: #f5f5fa;
+          margin-bottom: 7px;
+        }
+
+        & .message-panel__body-text {
+          font-size: 12px;
+          color: #d0d0d9;
+        }
+      }
+
+      & .message-panel__footer {
+        padding: 8px;
+        display: flex;
+        justify-content: space-evenly;
+        & img {
+          height: 24px;
+        }
+      }
+    }
+
+    & .menu-items {
+      margin-top: 16px;
+      & .item {
+        padding: 12px;
+        display: flex;
+        align-items: center;
+
+        & img {
+          width: 24px;
+          height: 24px;
+        }
+
+        & span {
+          color: #b6b6bf;
+          font-size: 14px;
+          font-family: cursive;
+          margin-left: 16px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  & .content {
+    width: 100%;
+    & .content__head {
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      padding-left: 24px;
+      & span {
+        font-size: 28px;
+        color: #f5f5fa;
+        font-family: monospace;
+      }
+    }
+
+    & .content__body {
+      padding: 0 24px 24px 0;
+    }
+  }
 }
 
 .home-page__slide {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: calc(100% - 124px);
+  background: white;
+  border-radius: 16px;
   & .home-page__photo {
     height: 500px;
     width: 700px;
