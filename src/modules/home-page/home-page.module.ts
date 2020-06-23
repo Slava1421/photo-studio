@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CyclicSliderModule } from '../cyclic-slider/cyclic-slider.module';
 import { QRCodeModule } from 'angularx-qrcode';
 import { WebSocketPhotoService } from './services/web-socket-photo.service';
+import { DialogWindowModule } from '../dialog-window/dialog-window.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { WebSocketPhotoService } from './services/web-socket-photo.service';
     CommonModule,
     BrowserAnimationsModule,
     CyclicSliderModule,
-    QRCodeModule
+    QRCodeModule,
+    DialogWindowModule
   ],
   exports: [HomePageComponent],
   providers: [WebSocketPhotoService]

@@ -50,11 +50,19 @@
     <div class="content__body">
       <app-cyclic-slider>
         <div class="home-page__slide" *appSlideItem>
-          <div class="home-page__photo">
-            <qrcode *ngIf="false" [qrdata]="'Your data string'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
-            <img [src]="imgBase64">
-            <button (click)="click()"> Закрыть сокет</button>
+
+          <div class="document" *ngFor="let doc of documents">
+            <div class="document__caption">
+              {{doc.caption}}
+            </div>
+            <div class="document__files">
+              <div class="document__file" *ngFor="let file of doc.files" (click)="openDialog(doc.name, file.name)"
+              [class.document__file_valid]="file.statusUpload">
+                {{file.name}}
+              </div>
+            </div>
           </div>
+
         </div>
         <div *appSlideItem [style.background]="'green'">2</div>
         <div *appSlideItem [style.background]="'blue'">3</div>
@@ -64,5 +72,5 @@
       </app-cyclic-slider>
     </div>
   </div>
-
+  <ng-container appDialogHost (ok)="dialogOk()" (close)="dialogClose()"></ng-container>
 </div>

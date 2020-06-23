@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WebSocketPhotoService } from '../../services/web-socket-photo.service';
-import { map } from 'rxjs/operators';
+import { DialogService } from 'src/modules/dialog-window/services/dialog.service';
 
 @Component({
   selector: 'app-home-page',
@@ -11,8 +11,45 @@ import { map } from 'rxjs/operators';
 export class HomePageComponent implements OnInit {
 
   imgBase64: string;
+  docName: string;
+  fileName: string;
 
-  constructor(private socket: WebSocketPhotoService) {
+  documents = [
+    {
+      name: 'doc1',
+      caption: 'Паспорт-книжка',
+      files: [
+        {
+          name: 'Стр. 1-2',
+          statusUpload: false
+        },
+        {
+          name: 'Стр. 3-4',
+          statusUpload: false
+        },
+        {
+          name: 'Стр. 5-6',
+          statusUpload: false
+        }
+      ]
+    },
+    {
+      name: 'doc2',
+      caption: 'Витяг з державного реєстру',
+      files: [
+        {
+          name: 'Лицьова сторінка',
+          statusUpload: false
+        },
+        {
+          name: 'Зворотна сторона',
+          statusUpload: false
+        }
+      ]
+    }
+  ];
+
+  constructor(private socket: WebSocketPhotoService, private dialogAction: DialogService) {
     socket.getDataSocket().subscribe((data: string) => {
       this.imgBase64 = data;
     });
@@ -38,7 +75,19 @@ export class HomePageComponent implements OnInit {
     xhr.send();
   }
 
-  click() {
+  openDialog(docName: string, fileName: string) {
+    this.socket.initSocket();
+    this.docName = docName;
+    this.fileName = fileName;
+    this.dialogAction.openDialog();
+  }
+
+  dialogOk() {
+    this.socket.closeConnect();
+    this.documents.find(f => f.name === this.docName).files.find(f => f.name === this.fileName).statusUpload = true;
+  }
+
+  dialogClose() {
     this.socket.closeConnect();
   }
 }

@@ -1,0 +1,22 @@
+<div class="overlay" (click)="onClose($event)">
+  <div class="dialog" (click)="$event.stopPropagation();">
+    <div class="dialog__head">
+      <span>Фотографування документів</span>
+    </div>
+    <div class="dialog__body">
+      <div class="area-pictures">
+        <qrcode *ngIf="!imgBase64" [qrdata]="'Your data string'" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+        <img *ngIf="!!imgBase64" [src]="imgBase64">
+      </div>
+    </div>
+    <div class="dialog__footer">
+      <div class="buttons">
+        <button (click)="onClose($event)">Відмінити</button>
+        <button (click)="onOk()">Ok</button>
+      </div>
+    </div>
+    <button *ngIf="!!imgBase64" class="btn-reset" (click)="reset()">
+      <img src="../../../../assets/icons/repeat.png">
+    </button>
+  </div>
+</div>
