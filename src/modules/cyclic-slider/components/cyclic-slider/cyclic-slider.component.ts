@@ -14,20 +14,19 @@ export class CyclicSliderComponent implements AfterViewInit, AfterContentInit, O
 
   @ViewChild('slider') sliders: ElementRef;
   @Input() height: number = 0;
+  @Input() startSlidePosTransform = 0;
 
   @ContentChildren(SlideItemDirective) slideInputs: QueryList<SlideItemDirective>;
 
   sections: SlideItemDirective[];
-
-  startSlidePosTransform = 0;
   activateAnimation = false;
-
   indexSection: number = 0;
 
-  constructor(private elRef: ElementRef) {}
+  constructor(private elRef: ElementRef) { }
 
   ngOnInit(): void {
     this.height = this.height === 0 ? this.elRef.nativeElement.offsetParent.clientHeight : this.height;
+    this.scrollToSection(this.startSlidePosTransform, false);
   }
 
   ngAfterContentInit(): void {
@@ -61,24 +60,24 @@ export class CyclicSliderComponent implements AfterViewInit, AfterContentInit, O
       this.activateAnimation = false;
       const firstSection = this.sections.shift();
       this.sections.push(firstSection);
-      
+
       this.startSlidePosTransform = this.startSlidePosTransform + (this.height);
 
       setTimeout(() => {
         this.activateAnimation = true;
         this.startSlidePosTransform = this.startSlidePosTransform + (-this.height);
       });
-      
+
 
     } else {
       this.startSlidePosTransform = this.startSlidePosTransform + (-this.height);
     }
   }
 
-  scrollToSection(indexSection: number): void {
+  scrollToSection(indexSection: number, isAnimation = true): void {
     if (this.activateAnimation || this.indexSection === indexSection) { return; }
 
-    this.activateAnimation = true;
+    if(isAnimation) this.activateAnimation = true;
     this.indexSection = indexSection;
     this.startSlidePosTransform = (-this.height * indexSection);
   }

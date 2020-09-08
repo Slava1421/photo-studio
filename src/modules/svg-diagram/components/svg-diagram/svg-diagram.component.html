@@ -1,0 +1,11 @@
+<p>svg-diagram works!</p>
+
+<svg #svg class="svg-diagram" viewBox="0 0 500 500" preserveAspectRatio="none" (mouseup)="onMouseup($event)"
+  (mousemove)="onMove($event)">
+  <line class="svg-diagram__line" [attr.x1]="arrPoints[0].cx" [attr.y1]="arrPoints[0].cy" [attr.x2]="arrPoints[1].cx"
+    [attr.y2]="arrPoints[1].cy" stroke="white" />
+
+  <!-- <circle class="svg-diagram__circle" cx="100" cy="20" r="2" stroke="white" fill="red" /> -->
+  <circle class="svg-diagram__circle" *ngFor="let point of arrPoints" [attr.cx]="point.cx" [attr.cy]="point.cy" r="2"
+    stroke="white" fill="red" (mousedown)="onMousedown(point.key)" />
+</svg>

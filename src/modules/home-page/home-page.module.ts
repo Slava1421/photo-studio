@@ -6,6 +6,7 @@ import { CyclicSliderModule } from '../cyclic-slider/cyclic-slider.module';
 import { QRCodeModule } from 'angularx-qrcode';
 import { WebSocketPhotoService } from './services/web-socket-photo.service';
 import { DialogWindowModule } from '../dialog-window/dialog-window.module';
+import { SvgDiagramModule } from '../svg-diagram/svg-diagram.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { DialogWindowModule } from '../dialog-window/dialog-window.module';
     BrowserAnimationsModule,
     CyclicSliderModule,
     QRCodeModule,
-    DialogWindowModule
+    DialogWindowModule,
+    SvgDiagramModule
   ],
   exports: [HomePageComponent],
   providers: [WebSocketPhotoService]

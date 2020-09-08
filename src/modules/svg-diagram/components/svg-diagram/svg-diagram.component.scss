@@ -1,0 +1,16 @@
+.svg-diagram {
+  height: 100%;
+  width: 100%;
+}
+
+.svg-diagram__line:hover {
+  // stroke: #646464;
+  stroke-width:2;
+  cursor: pointer;
+}
+
+.svg-diagram__circle:hover {
+  fill: #dd130c;
+  stroke-width:2;
+  cursor: pointer;
+}

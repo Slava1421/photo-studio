@@ -48,7 +48,7 @@
       <span>Фотографування документів</span>
     </div>
     <div class="content__body">
-      <app-cyclic-slider>
+      <app-cyclic-slider [startSlidePosTransform]="1">
         <div class="home-page__slide" *appSlideItem>
 
           <div class="document" *ngFor="let doc of documents">
@@ -64,7 +64,9 @@
           </div>
 
         </div>
-        <div *appSlideItem [style.background]="'green'">2</div>
+        <div *appSlideItem >
+          <app-svg-diagram></app-svg-diagram>
+        </div>
         <div *appSlideItem [style.background]="'blue'">3</div>
         <div *appSlideItem [style.background]="'yellow'">4</div>
         <div *appSlideItem [style.background]="'grey'">5</div>
